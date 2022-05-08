@@ -44,7 +44,7 @@ Từ đó, không những việc quản lý thông tin và cập nhật 
 > - Công cụ lập trình giao diện: JavaSwing.
 > - Công cụ lập trình cơ sở dữ liệu: SQL Developer.
 > - Hệ quản trị cơ sở dữ liệu:  Oracle.
-> - Công cụ thiết kế cơ sở dữ liệu: Draw.io + SmartArt.
+> - Công cụ thiết kế cơ sở dữ liệu: Draw.io + SmartDraw.
 > - Công cụ xuất báo biểu: iReport.
 > 
 ## Các chức năng, công nghệ mới(ngoài phạm vi môn học)
