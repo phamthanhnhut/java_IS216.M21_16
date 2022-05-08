@@ -31,7 +31,7 @@ Từ đó, không những việc quản lý thông tin và cập nhật 
 > - Tính toán và xuất hoá đơn.
 > - Thống kê và tổng hợp.
 > - ...
-#### Chức năng của người quản trị viên
+#### Chức năng của quản trị viên
 > - Quản lý nhân viên.
 > - Quản lý khách hàng.
 > - Quản lý huấn luyện viên.
@@ -39,10 +39,12 @@ Từ đó, không những việc quản lý thông tin và cập nhật 
 > - Quản lý thiết bị.
 > - Quản lý sản phẩm.
 > - ...
-## Các công nghệ, nền tảng đã sử dụng
+## Các công nghệ sử dụng
 > - Ngôn ngữ lập trình: Java.
 > - Công cụ lập trình giao diện: JavaSwing.
-> - Database Management System: Oracle.
+> - Công cụ lập trình cơ sở dữ liệu: SQL Developer.
+> - Hệ quản trị cơ sở dữ liệu:  Oracle.
+> - Công cụ thiết kế cơ sở dữ liệu: Draw.io + SmartArt.
 > - Công cụ xuất báo biểu: iReport.
 > 
 ## Các chức năng, công nghệ mới(ngoài phạm vi môn học)
