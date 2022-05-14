@@ -35,16 +35,15 @@ Từ đó, không những việc quản lý thông tin và cập nhật 
 > - Quản lý nhân viên.
 > - Quản lý khách hàng.
 > - Quản lý huấn luyện viên.
-> - Quản lý phòng tập.
-> - Quản lý thiết bị.
 > - Quản lý sản phẩm.
+> - Quản lý việc đăng ký tập luyện.
 > - ...
 ## Các công nghệ sử dụng
 > - Ngôn ngữ lập trình: Java.
 > - Công cụ lập trình giao diện: JavaSwing.
 > - Công cụ lập trình cơ sở dữ liệu: SQL Developer.
 > - Hệ quản trị cơ sở dữ liệu:  Oracle.
-> - Công cụ thiết kế cơ sở dữ liệu: Draw.io + SmartDraw.
+> - Công cụ thiết kế cơ sở dữ liệu: Draw.io.
 > - Công cụ xuất báo biểu: iReport.
 > 
 ## Các chức năng, công nghệ mới(ngoài phạm vi môn học)
