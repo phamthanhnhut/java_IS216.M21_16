@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # LỚP IS216.M21 - nhóm 16
 # Xây dựng hệ thống quản lý phòng Gym
 
@@ -52,4 +51,3 @@ Từ đó, không những việc quản lý thông tin và cập nhật 
 > 
 =======
 
->>>>>>> hinduck
