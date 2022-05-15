@@ -50,6 +50,4 @@ Từ đó, không những việc quản lý thông tin và cập nhật 
 ## Các chức năng, công nghệ mới(ngoài phạm vi môn học)
 > ...
 > 
-=======
 
->>>>>>> hinduck
