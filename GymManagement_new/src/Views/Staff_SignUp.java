@@ -22,7 +22,7 @@ public class Staff_SignUp extends javax.swing.JFrame {
      */
     public Staff_SignUp() {
         initComponents();
-        setTitle("Quản Lý Khách Hàng");
+        setTitle("Quản Lý Nhân Viên");
         setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
