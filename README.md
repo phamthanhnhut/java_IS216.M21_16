@@ -63,7 +63,7 @@ Từ đó, không những việc quản lý thông tin và cập nhật 
 > - Công cụ quản lý: Github - quản lý mã nguồn, Trello - quản lý và phân công công việc.
 
 
-## Các chức năng, công nghệ mới(ngoài phạm vi môn học)
+## Các chức năng, công nghệ mới (ngoài phạm vi môn học)
 > - Chức năng mã hóa mật khẩu: Sử dụng kỹ thuật hàm băm MD5 (Message-Digest Algorithm 5): thuật toán tiêu hóa tin nhắn 5. Kết hợp giữa mật khẩu người dùng nhập và SĐT để tạo thành 1 hàm băm với độ khó cao hơn.
 > - Chức năng chat : Sử dụng kỹ thuật lập trình Socket để minh họa việc chat giữa người dùng và quản trị viên, phục vụ cho việc hỗ trợ và giao tiếp giữa khách hàng và hệ thống quản lý.
 > - Chức năng thanh toán bằng ví điện tử MoMo: sử dụng chuẩn lập trình RESTful API trong NodeJS nhằm tạo ra 1 server cung cấp các chức năng để thay đổi trên CSDL thông qua giao thức HTTP -> POST lên web browser. Cách mở server cho API: [Mở server API](https://drive.google.com/file/d/1ffriiS95ocloMxz5HjMO0equm3588pfT/view?usp=sharing)
