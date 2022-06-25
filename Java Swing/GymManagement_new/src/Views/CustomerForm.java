@@ -767,6 +767,7 @@ public class CustomerForm extends javax.swing.JFrame {
     }
 
     private void resetCustomer() {
+        tbCustomer.setDefaultEditor(Object.class, null);
         txtName.setText("");
         txtAddress.setText("");
         txtTelephone.setText("");

@@ -9,6 +9,7 @@ import Processes.ClockThread;
 import Processes.Membership;
 import Processes.Payment;
 import Processes.API;
+import Processes.ReportView;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -21,10 +22,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -610,6 +613,14 @@ public class MembershipForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void LayHoaDonMem(String s) throws SQLException, JRException, ClassNotFoundException {
+        HashMap hs = new HashMap();
+        hs.put("parameter1", s);
+        String localDir = System.getProperty("user.dir");
+
+        ReportView viewer = new ReportView(localDir + "/src/Report/report6_2_1.jrxml", hs);
+        viewer.setVisible(false);
+    }
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
         memId = listMemId.get(cbxBonus.getSelectedIndex() - 1);
@@ -623,34 +634,40 @@ public class MembershipForm extends javax.swing.JFrame {
                     int btn = JOptionPane.showConfirmDialog(this, "Bạn có muốn đăng ký dịch vụ này không?", "Xác nhận", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                     if (btn == JOptionPane.YES_OPTION) {
                         Payment.addPaymentTotal(paymentId);
-                        API.TrangThanhToanMoMo(paymentId, txtFee.getText());
+                        try {
+                            API.TrangThanhToanMoMo(paymentId, txtFee.getText());
+                        } catch (IOException ex) {
+                            Logger.getLogger(MembershipForm.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         JOptionPane.showMessageDialog(rootPane, "Đăng ký dịch vụ THÀNH CÔNG");
                         Payment.addPaymentMode(paymentId, paymentMode);
-                        JOptionPane.showMessageDialog(this, "Tính năng in hóa đơn đang bảo trì, vui lòng quay lại sau!", "Bảo Trì", JOptionPane.WARNING_MESSAGE);
+                        LayHoaDonMem(lbPaymentId.getText());
                         JOptionPane.showMessageDialog(rootPane, "Vui lòng LÀM MỚI trạng thái sau khi đăng ký", "Thông báo", JOptionPane.CANCEL_OPTION);
                         this.dispose();
                     } else if (btn == JOptionPane.NO_OPTION) {
                         remove(this);
                     }
-                } catch (IOException ex) {
-                    Logger.getLogger(MuaHang.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException | JRException | ClassNotFoundException ex) {
+                    Logger.getLogger(MembershipForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
                 int btn = JOptionPane.showConfirmDialog(this, "Bạn có muốn đăng ký dịch vụ này không?", "Xác nhận", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (btn == JOptionPane.YES_OPTION) {
-                    Payment.addPaymentTotal(paymentId);
-                    JOptionPane.showMessageDialog(rootPane, "Đăng ký dịch vụ THÀNH CÔNG");
-                    Payment.addPaymentMode(paymentId, paymentMode);
-                    JOptionPane.showMessageDialog(this, "Tính năng in hóa đơn đang bảo trì, vui lòng quay lại sau!", "Bảo Trì", JOptionPane.WARNING_MESSAGE);
-                    JOptionPane.showMessageDialog(rootPane, "Vui lòng LÀM MỚI trạng thái sau khi đăng ký", "Thông báo", JOptionPane.CANCEL_OPTION);
-                    this.dispose();
+                    try {
+                        Payment.addPaymentTotal(paymentId);
+                        JOptionPane.showMessageDialog(rootPane, "Đăng ký dịch vụ THÀNH CÔNG");
+                        Payment.addPaymentMode(paymentId, paymentMode);
+                        LayHoaDonMem(lbPaymentId.getText());
+                        JOptionPane.showMessageDialog(rootPane, "Vui lòng LÀM MỚI trạng thái sau khi đăng ký", "Thông báo", JOptionPane.CANCEL_OPTION);
+                        this.dispose();
+                    } catch (SQLException | JRException | ClassNotFoundException ex) {
+                        Logger.getLogger(MembershipForm.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 } else if (btn == JOptionPane.NO_OPTION) {
                     remove(this);
                 }
             }
         }
-
-
     }//GEN-LAST:event_btnConfirmActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing

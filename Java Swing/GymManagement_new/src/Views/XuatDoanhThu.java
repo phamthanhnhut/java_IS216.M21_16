@@ -6,7 +6,6 @@ package Views;
 
 import Processes.ReportView;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,34 +28,40 @@ public class XuatDoanhThu extends javax.swing.JFrame {
         setResizable(false);
     }
 
-    public void LayDoanhThu(int a, int b, String c) throws SQLException, JRException, ClassNotFoundException {
+    private void LayDoanhThuProduct(int a, int b, String c) throws SQLException, JRException, ClassNotFoundException {
         // TODO code application logic here
-
         HashMap hs = new HashMap();
         hs.put("thang", a);
         hs.put("YEAR", b);
         hs.put("nguoiky", c);
         String localDir = System.getProperty("user.dir");
 
-        ReportView viewer = new ReportView(localDir + "\\src\\Report\\DoanhThu.jrxml", hs);
-        viewer.setVisible(true);
+        ReportView viewer = new ReportView(localDir + "\\src\\Report\\report4_1.jrxml", hs);
+        viewer.setVisible(false);
     }
 
-    public void getNgayChieu() throws SQLException, ClassNotFoundException, ParseException {
-//        try {
-//            cbxNam.removeAllItems();
-//            Connection con;
-//            con = ConnectionUtils.getOracleConnection();
-//            String SQL = "SELECT distinct extract(year from payment_lastday) FROM DATVE";
-//            Statement s = con.createStatement();
-//            ResultSet rs = s.executeQuery(SQL);
-//            while (rs.next()) {
-//                nam_array.add(rs.getInt(1));
-//            }
-//            selectNam.setModel(new DefaultComboBoxModel(nam_array.toArray()));
-//        } catch (HeadlessException | SQLException ex) {
-//            System.out.println(ex);
-//        }
+    private void LayDoanhThuMem(int a, int b, String c) throws SQLException, JRException, ClassNotFoundException {
+        // TODO code application logic here
+        HashMap hs = new HashMap();
+        hs.put("thang", a);
+        hs.put("YEAR", b);
+        hs.put("NguoiKy", c);
+        String localDir = System.getProperty("user.dir");
+
+        ReportView viewer = new ReportView(localDir + "\\src\\Report\\reportDOANHTHU.jrxml", hs);
+        viewer.setVisible(false);
+    }
+
+    private void LayDoanhThuClass(int a, int b, String c) throws SQLException, JRException, ClassNotFoundException {
+        // TODO code application logic here
+        HashMap hs = new HashMap();
+        hs.put("thang", a);
+        hs.put("YEAR", b);
+        hs.put("NguoiKy", c);
+        String localDir = System.getProperty("user.dir");
+
+        ReportView viewer = new ReportView(localDir + "\\src\\Report\\reportDOANHTHU_1.jrxml", hs);
+        viewer.setVisible(false);
     }
 
     /**
@@ -72,10 +77,8 @@ public class XuatDoanhThu extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnProduct = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtNguoiLap = new javax.swing.JTextPane();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -84,6 +87,10 @@ public class XuatDoanhThu extends javax.swing.JFrame {
         lbExit = new javax.swing.JLabel();
         dcMonth = new com.toedter.calendar.JMonthChooser();
         dcYear = new com.toedter.calendar.JYearChooser();
+        btnMembership = new javax.swing.JButton();
+        btnClass = new javax.swing.JButton();
+        txtNguoiLap = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -105,13 +112,14 @@ public class XuatDoanhThu extends javax.swing.JFrame {
         jLabel14.setForeground(new java.awt.Color(134, 1, 4));
         jLabel14.setText("NĂM");
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setFont(new java.awt.Font("#9Slide03 Roboto Condensed Bold", 1, 36)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(134, 1, 4));
-        jButton2.setText("XUẤT DOANH THU");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnProduct.setBackground(new java.awt.Color(255, 255, 255));
+        btnProduct.setFont(new java.awt.Font("#9Slide03 Roboto Condensed Bold", 1, 36)); // NOI18N
+        btnProduct.setForeground(new java.awt.Color(134, 1, 4));
+        btnProduct.setText("SẢN PHẨM");
+        btnProduct.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnProductActionPerformed(evt);
             }
         });
 
@@ -119,16 +127,13 @@ public class XuatDoanhThu extends javax.swing.JFrame {
         jLabel15.setForeground(new java.awt.Color(134, 1, 4));
         jLabel15.setText("NGƯỜI LẬP");
 
-        txtNguoiLap.setBackground(new java.awt.Color(255, 255, 255));
-        txtNguoiLap.setFont(new java.awt.Font("#9Slide03 Roboto Condensed", 1, 18)); // NOI18N
-        txtNguoiLap.setForeground(new java.awt.Color(134, 1, 4));
-        jScrollPane2.setViewportView(txtNguoiLap);
-
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/icons8-board-100.png"))); // NOI18N
 
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/icons8-analyst-100.png"))); // NOI18N
 
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/icons8-business-100.png"))); // NOI18N
 
         lvMinimize.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
@@ -154,84 +159,118 @@ public class XuatDoanhThu extends javax.swing.JFrame {
 
         dcYear.setBackground(new java.awt.Color(134, 1, 4));
 
+        btnMembership.setBackground(new java.awt.Color(255, 255, 255));
+        btnMembership.setFont(new java.awt.Font("#9Slide03 Roboto Condensed Bold", 1, 36)); // NOI18N
+        btnMembership.setForeground(new java.awt.Color(134, 1, 4));
+        btnMembership.setText("DỊCH VỤ");
+        btnMembership.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnMembership.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMembershipActionPerformed(evt);
+            }
+        });
+
+        btnClass.setBackground(new java.awt.Color(255, 255, 255));
+        btnClass.setFont(new java.awt.Font("#9Slide03 Roboto Condensed Bold", 1, 36)); // NOI18N
+        btnClass.setForeground(new java.awt.Color(134, 1, 4));
+        btnClass.setText("KHÓA TẬP");
+        btnClass.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnClass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClassActionPerformed(evt);
+            }
+        });
+
+        txtNguoiLap.setBackground(new java.awt.Color(255, 255, 255));
+        txtNguoiLap.setFont(new java.awt.Font("#9Slide03 Roboto Condensed", 0, 14)); // NOI18N
+        txtNguoiLap.setForeground(new java.awt.Color(134, 1, 4));
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/icons8-growth-100.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(7, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lvMinimize)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(dcMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dcYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(37, 37, 37)
-                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addComponent(jLabel15)
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(dcMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(btnMembership, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                                .addComponent(btnClass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(dcYear, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel15)
+                                .addGap(71, 71, 71))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtNguoiLap, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lvMinimize)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lvMinimize, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(4, 4, 4)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addComponent(dcMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(lvMinimize, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(dcYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jButton2))
-                        .addGap(87, 87, 87))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(112, 112, 112))))
+                    .addComponent(dcMonth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtNguoiLap))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(btnProduct)
+                                .addGap(12, 12, 12)
+                                .addComponent(btnMembership)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnClass))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -242,24 +281,28 @@ public class XuatDoanhThu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 301, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductActionPerformed
         // TODO add your handling code here:
-        int month = dcMonth.getMonth();
+        int month = dcMonth.getMonth() + 1;
         int year = dcYear.getYear();
-        String c = txtNguoiLap.getText();
-        try {
-            LayDoanhThu(month, year, c);
-        } catch (SQLException | JRException | ClassNotFoundException ex) {
-            Logger.getLogger(XuatDoanhThu.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Không thể XUẤT DOANH THU tháng này!", "Doanh Thu", JOptionPane.WARNING_MESSAGE);
+        String nguoiLap = txtNguoiLap.getText();
+        if (nguoiLap.equals("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập HỌ VÀ TÊN người lập thống kê!", "Người lập báo cáo", JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
+                LayDoanhThuProduct(month, year, nguoiLap);
+            } catch (SQLException | JRException | ClassNotFoundException ex) {
+                Logger.getLogger(XuatDoanhThu.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Không thể XUẤT DOANH THU tháng này!", "Doanh Thu", JOptionPane.ERROR_MESSAGE);
+            }
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnProductActionPerformed
 
     private void lvMinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lvMinimizeMouseClicked
         // TODO add your handling code here:
@@ -270,6 +313,40 @@ public class XuatDoanhThu extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_lbExitMouseClicked
+
+    private void btnMembershipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMembershipActionPerformed
+        // TODO add your handling code here:
+        int month = dcMonth.getMonth() + 1;
+        int year = dcYear.getYear();
+        String nguoiLap = txtNguoiLap.getText();
+        if (nguoiLap.equals("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập HỌ VÀ TÊN người lập thống kê!", "Người lập báo cáo", JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
+                LayDoanhThuMem(month, year, nguoiLap);
+            } catch (SQLException | JRException | ClassNotFoundException ex) {
+                Logger.getLogger(XuatDoanhThu.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Không thể XUẤT DOANH THU tháng này!", "Doanh Thu", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnMembershipActionPerformed
+
+    private void btnClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClassActionPerformed
+        // TODO add your handling code here:
+        int month = dcMonth.getMonth() + 1;
+        int year = dcYear.getYear();
+        String nguoiLap = txtNguoiLap.getText();
+        if (nguoiLap.equals("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập HỌ VÀ TÊN người lập thống kê!", "Người lập báo cáo", JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
+                LayDoanhThuClass(month, year, nguoiLap);
+            } catch (SQLException | JRException | ClassNotFoundException ex) {
+                Logger.getLogger(XuatDoanhThu.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Không thể XUẤT DOANH THU tháng này!", "Doanh Thu", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnClassActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,13 +378,16 @@ public class XuatDoanhThu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new XuatDoanhThu().setVisible(true);
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ HỌ VÀ TÊN người lập thống kê", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClass;
+    private javax.swing.JButton btnMembership;
+    private javax.swing.JButton btnProduct;
     private com.toedter.calendar.JMonthChooser dcMonth;
     private com.toedter.calendar.JYearChooser dcYear;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -316,10 +396,10 @@ public class XuatDoanhThu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbExit;
     private javax.swing.JLabel lvMinimize;
-    private javax.swing.JTextPane txtNguoiLap;
+    private javax.swing.JTextField txtNguoiLap;
     // End of variables declaration//GEN-END:variables
 }

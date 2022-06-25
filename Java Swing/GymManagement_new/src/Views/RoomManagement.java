@@ -524,6 +524,7 @@ public class RoomManagement extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void resetClass() {
+        txtSearch.setText("SEARCH");
         txtCapacity.setText("");
     }
 }

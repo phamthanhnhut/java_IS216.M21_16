@@ -72,6 +72,7 @@ public class SignUpClassForm extends javax.swing.JFrame {
         setCbxClassTitle();
         setCbxPaymentMode();
 
+        tableClass.setDefaultEditor(Object.class, null);
         txtName.setEditable(false);
         txtDate.setEditable(false);
         txtTelephone.setEditable(false);
@@ -1093,8 +1094,6 @@ public class SignUpClassForm extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Đã đăng ký khóa tập trong thời gian này!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
         }
-
-
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void cbxClassPeriodPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cbxClassPeriodPopupMenuWillBecomeInvisible
@@ -1205,6 +1204,24 @@ public class SignUpClassForm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_lbExitMouseClicked
 
+    private void XuatHoaDonDiscount(String s) throws JRException, SQLException, ClassNotFoundException {
+        HashMap hs = new HashMap();
+        hs.put("parameter1", s);
+        String localDir = System.getProperty("user.dir");
+
+        ReportView viewer = new ReportView(localDir + "/src/Report/report6_1_1.jrxml", hs);
+        viewer.setVisible(false);
+    }
+
+    private void XuatHoaDonNoDiscount(String s) throws JRException, SQLException, ClassNotFoundException {
+        HashMap hs = new HashMap();
+        hs.put("parameter1", s);
+        String localDir = System.getProperty("user.dir");
+
+        ReportView viewer = new ReportView(localDir + "/src/Report/report6_1.jrxml", hs);
+        viewer.setVisible(false);
+    }
+
     private void btnXuatHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatHoaDonActionPerformed
         if (model.getRowCount() == 0) {
             JOptionPane.showMessageDialog(this, "Không có khóa tập trong đơn hàng!", "Lỗi", JOptionPane.WARNING_MESSAGE);
@@ -1221,15 +1238,21 @@ public class SignUpClassForm extends javax.swing.JFrame {
                     Logger.getLogger(MuaHang.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            default -> {
-            }
         }
         Payment.addPaymentMode(paymentId, paymentMode);
-        JOptionPane.showMessageDialog(this, "Tính năng đang bảo trì, vui lòng quay lại sau!", "Bảo Trì", JOptionPane.WARNING_MESSAGE);
+        try {
+            if (lbStatus.getText().equals("Trạng thái: Thêm mã giảm giá THÀNH CÔNG")) {
+                XuatHoaDonDiscount(paymentId);
+            } else {
+                XuatHoaDonNoDiscount(paymentId);
+            }
+        } catch (JRException | SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(SignUpClassForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnXuatHoaDonActionPerformed
 
     private void btnAddDiscountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDiscountActionPerformed
-        if (!txtDiscount.equals("")) {
+        if (!txtDiscount.getText().equals("")) {
             String discount = txtDiscount.getText();
             for (String s : listDiscountCode) {
                 if (s.equals(discount)) {

@@ -48,6 +48,8 @@ public class MembershipManagement extends javax.swing.JFrame {
     }
 
     private void resetClass() {
+        tableMembership.setDefaultEditor(Object.class, null);
+        txtSearch.setText("SEARCH");
         buttonGroup1.clearSelection();
         txtBonus.setText("");
         txtCost.setText("");

@@ -20,7 +20,6 @@ public class ProductManagement extends javax.swing.JFrame {
 
     DefaultTableModel modelProduct = null;
     String maHangHoa;
-    
 
     /**
      * Creates new form CustomerForm
@@ -39,6 +38,7 @@ public class ProductManagement extends javax.swing.JFrame {
         setTableProduct();
         setComboBoxType();
         initClock();
+        resetProduct();
     }
 
     private void initClock() {
@@ -62,7 +62,7 @@ public class ProductManagement extends javax.swing.JFrame {
                 String soLuong = rs.getString("product_amount");
                 if ("0".equals(soLuong)) {
                     soLuong = "Hết hàng";
-                }                     
+                }
                 modelProduct.addRow(new Object[]{ma, tenHangHoa, giaTien, loaiHangHoa, soLuong});
             }
         } catch (SQLException | ClassNotFoundException ex) {
@@ -637,6 +637,8 @@ public class ProductManagement extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void resetProduct() {
+        tableProduct.setDefaultEditor(Object.class, null);
+        txtSearch.setText("SEARCH");
         txtName.setText("");
         txtPrice.setText("");
         txtAmount.setText("");

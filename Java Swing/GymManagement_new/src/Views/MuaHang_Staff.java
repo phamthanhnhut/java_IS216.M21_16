@@ -9,6 +9,7 @@ import Processes.ClockThread;
 import Processes.Payment;
 import Processes.PaymentDetail;
 import Processes.API;
+import Processes.ReportView;
 import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -23,11 +24,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -65,18 +68,19 @@ public class MuaHang_Staff extends javax.swing.JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         model = (DefaultTableModel) tablePayment.getModel();
-        tablePayment.setEnabled(false);
         getStaffId();
         loadDiscount();
 
         setCbxProductType();
         setCbxPaymentMode();
 
+        tablePayment.setDefaultEditor(Object.class, null);
         txtAddress.setEditable(false);
         dcDate.setDate(new Date());
         txtPrice.setEditable(false);
         txtIntoMoney.setEditable(false);
         txtTongTien.setEditable(false);
+        txtName.setEditable(false);
         initClock();
 
         cbxPaymentMode.setEnabled(false);
@@ -117,7 +121,6 @@ public class MuaHang_Staff extends javax.swing.JFrame {
         model.setRowCount(0);
 
         btnSave.setEnabled(false);
-        btnUpdateProduct.setEnabled(false);
         btnDeleteProduct.setEnabled(false);
 
         Disable();
@@ -158,17 +161,16 @@ public class MuaHang_Staff extends javax.swing.JFrame {
                 staffId += (char) i;
             }
             if ("admin".equals(staffId)) {
-                lbStaffId.setText("ADMIN");
+                lbStaffId.setText("admin");
             } else {
                 lbStaffId.setText("0" + staffId);
-            }
-
-            Connection conn = ConnectionUtils.getOracleConnection();
-            String sql = "SELECT staff_id FROM STAFF WHERE staff_telephone = '" + staffId + "' ";
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            while (rs.next()) {
-                staff_id = rs.getString("staff_id");
+                Connection conn = ConnectionUtils.getOracleConnection();
+                String sql = "SELECT staff_id FROM STAFF WHERE staff_telephone = '" + staffId + "' ";
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+                while (rs.next()) {
+                    staff_id = rs.getString("staff_id");
+                }
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MuaHang_Staff.class.getName()).log(Level.SEVERE, null, ex);
@@ -370,7 +372,6 @@ public class MuaHang_Staff extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         btnRefresh = new javax.swing.JButton();
         btnAddProduct = new javax.swing.JButton();
-        btnUpdateProduct = new javax.swing.JButton();
         btnDeleteProduct = new javax.swing.JButton();
         lbPaymentId = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
@@ -676,17 +677,6 @@ public class MuaHang_Staff extends javax.swing.JFrame {
             }
         });
 
-        btnUpdateProduct.setBackground(new java.awt.Color(255, 255, 255));
-        btnUpdateProduct.setFont(new java.awt.Font("#9Slide03 Roboto Condensed Bold", 0, 14)); // NOI18N
-        btnUpdateProduct.setForeground(new java.awt.Color(134, 1, 4));
-        btnUpdateProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/icons8-edit-product-64.png"))); // NOI18N
-        btnUpdateProduct.setText("SỬA SẢN PHẨM");
-        btnUpdateProduct.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateProductActionPerformed(evt);
-            }
-        });
-
         btnDeleteProduct.setFont(new java.awt.Font("#9Slide03 Roboto Condensed Bold", 0, 14)); // NOI18N
         btnDeleteProduct.setForeground(new java.awt.Color(134, 1, 4));
         btnDeleteProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/icons8-remove-64.png"))); // NOI18N
@@ -777,9 +767,8 @@ public class MuaHang_Staff extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAddProduct)
                         .addGap(18, 18, 18)
-                        .addComponent(btnUpdateProduct)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDeleteProduct))
+                        .addComponent(btnDeleteProduct)
+                        .addGap(192, 192, 192))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(lbTinhTrang)
@@ -808,7 +797,6 @@ public class MuaHang_Staff extends javax.swing.JFrame {
                         .addComponent(btnAddPayment))
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnUpdateProduct)
                         .addComponent(btnDeleteProduct)))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
@@ -1089,7 +1077,6 @@ public class MuaHang_Staff extends javax.swing.JFrame {
     private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
         Enable();
         btnAddProduct.setEnabled(false);
-        btnUpdateProduct.setEnabled(false);
         btnDeleteProduct.setEnabled(false);
         btnAddProduct.setEnabled(false);
         cbxPaymentMode.setEnabled(true);
@@ -1145,11 +1132,9 @@ public class MuaHang_Staff extends javax.swing.JFrame {
             i = Payment.addPayment(ngay, cusId);
         } else {
             i = Payment.addPayment(ngay, staff_id, cusId);
-
         }
         if (i > 0) {
             getPaymentId();
-            System.out.println(paymentId);
             try {
                 try ( FileWriter fw = new FileWriter("src\\PaymentDetail.txt")) {
                     fw.write(paymentId);
@@ -1178,7 +1163,6 @@ public class MuaHang_Staff extends javax.swing.JFrame {
 
         Enable();
         btnAddProduct.setEnabled(true);
-        btnUpdateProduct.setEnabled(true);
         btnDeleteProduct.setEnabled(true);
         btnSave.setEnabled(false);
     }//GEN-LAST:event_tablePaymentMouseClicked
@@ -1208,27 +1192,6 @@ public class MuaHang_Staff extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnDeletePaymentActionPerformed
 
-    private void btnUpdateProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateProductActionPerformed
-        int Click = tablePayment.getSelectedRow();
-        String productIdOld = model.getValueAt(Click, 0).toString();;
-        String productIdNew = productId;
-        String amount = txtAmount.getText();
-        
-        if (Integer.valueOf(amount) > sl) {
-            JOptionPane.showMessageDialog(rootPane, "Vượt quá số lượng sản phẩm còn hàng", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        PaymentDetail.updateProduct(paymentId, productIdOld, productIdNew, amount);
-        setTablePayment();
-
-        refreshProduct();
-        btnAddProduct.setEnabled(true);
-        btnUpdateProduct.setEnabled(false);
-        btnDeleteProduct.setEnabled(false);
-        Disable();
-    }//GEN-LAST:event_btnUpdateProductActionPerformed
-
     private void cbxProductTypePopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cbxProductTypePopupMenuWillBecomeInvisible
         if (cbxProductType.getSelectedIndex() != 0) {
             setCbxProductName();
@@ -1242,7 +1205,6 @@ public class MuaHang_Staff extends javax.swing.JFrame {
             setTablePayment();
             refreshProduct();
             btnAddProduct.setEnabled(true);
-            btnUpdateProduct.setEnabled(false);
             btnDeleteProduct.setEnabled(false);
             Disable();
         }
@@ -1295,6 +1257,24 @@ public class MuaHang_Staff extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_lbExitMouseClicked
 
+    private void XuatHoaDonNoDiscount(String s) throws JRException, SQLException, ClassNotFoundException {
+        HashMap hs = new HashMap();
+        hs.put("parameter1", s);
+        String localDir = System.getProperty("user.dir");
+
+        ReportView viewer = new ReportView(localDir + "/src/Report/report3.jrxml", hs);
+        viewer.setVisible(false);
+    }
+
+    private void XuatHoaDonDiscount(String s) throws JRException, SQLException, ClassNotFoundException {
+        HashMap hs = new HashMap();
+        hs.put("parameter1", s);
+        String localDir = System.getProperty("user.dir");
+
+        ReportView viewer = new ReportView(localDir + "/src/Report/report3_1.jrxml", hs);
+        viewer.setVisible(false);
+    }
+
     private void btnXuatHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatHoaDonActionPerformed
         if (model.getRowCount() == 0) {
             JOptionPane.showMessageDialog(this, "Không có sản phẩm trong đơn hàng!", "Lỗi", JOptionPane.WARNING_MESSAGE);
@@ -1313,8 +1293,16 @@ public class MuaHang_Staff extends javax.swing.JFrame {
             }
 
         }
-        Payment.addPaymentMode(paymentId, paymentMode);
-        JOptionPane.showMessageDialog(this, "Tính năng đang bảo trì, vui lòng quay lại sau!", "Bảo Trì", JOptionPane.WARNING_MESSAGE);
+        try {
+            Payment.addPaymentMode(paymentId, paymentMode);
+            if (lbStatus.getText().equals("Trạng thái: Thêm mã giảm giá THÀNH CÔNG")) {
+                XuatHoaDonDiscount(paymentId);
+            } else {
+                XuatHoaDonNoDiscount(paymentId);
+            }
+        } catch (JRException | SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(MuaHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnXuatHoaDonActionPerformed
 
     private void txtTelephoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelephoneKeyPressed
@@ -1409,7 +1397,6 @@ public class MuaHang_Staff extends javax.swing.JFrame {
     private javax.swing.JButton btnDeleteProduct;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSave;
-    private javax.swing.JButton btnUpdateProduct;
     private javax.swing.JButton btnXuatHoaDon;
     private javax.swing.JComboBox<String> cbxPaymentMode;
     private javax.swing.JComboBox<String> cbxProductName;

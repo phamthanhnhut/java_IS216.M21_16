@@ -27,7 +27,6 @@ public class Payment {
 
                 String sql = "BEGIN INSERT_PAYMENT ('" + paymentLastDay + "', null, "
                         + "null, " + cusId + ", null); END;";
-                System.out.println(sql);
                 i = st.executeUpdate(sql);
 //            }
 

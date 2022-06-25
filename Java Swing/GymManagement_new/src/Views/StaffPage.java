@@ -47,9 +47,9 @@ public class StaffPage extends javax.swing.JFrame {
         txtName1.setEditable(false);
         txtType.setEditable(false);
     }
-    
+
     public static String SDT_staff = "";
-    
+
     private void initClock() {
         ClockThread ct = new ClockThread(lbClock, lbTime);
         ct.start();
@@ -474,14 +474,14 @@ public class StaffPage extends javax.swing.JFrame {
         btnRoom.setEnabled(false);
         btnPayment.setEnabled(false);
     }
-    
+
     private void forStaff() {
         btnClass.setEnabled(false);
         btnStaff.setEnabled(false);
         btnRoom.setEnabled(false);
         btnSales.setEnabled(false);
     }
-    
+
     private void getStaffPage() throws ClassNotFoundException {
         try {
             Staff s = new Staff();
@@ -499,11 +499,11 @@ public class StaffPage extends javax.swing.JFrame {
                 forInstructor();
             } else if ("Thu ngân".equals(txtType.getText())) {
                 forStaff();
-            } else if ("Quản lý".equals(txtType.getText()) && txtName1.getText().equals("admin")) {
+            } else if ("Quản lý".equals(txtType.getText()) || txtName1.getText().equals("admin")) {
                 btnChangePassword.setVisible(false);
                 btnEdit.setVisible(false);
             }
-            
+
         } catch (HeadlessException | SQLException ex) {
             Logger.getLogger(StaffPage.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -550,9 +550,10 @@ public class StaffPage extends javax.swing.JFrame {
                     sf.show();
                 }
             }
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(StaffPage.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Không thể truy cập vào trang Quản lý Nhân Viên", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_btnStaffActionPerformed
@@ -572,15 +573,17 @@ public class StaffPage extends javax.swing.JFrame {
                     cf.show();
                 }
             }
-            
+
         } catch (SQLException | ClassNotFoundException | IOException ex) {
             Logger.getLogger(StaffPage.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Không thể truy cập vào trang Quản lý Khách hàng", "Lỗi", JOptionPane.ERROR_MESSAGE);
+
         }
     }//GEN-LAST:event_btnCustomerActionPerformed
 
     private void btnSalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalesActionPerformed
         // TODO add your handling code here:
-        if ("admin".equals(SDT_staff)) {
+        if ("admin".equals(SDT_staff) || txtType.getText().equals("Quản lý")) {
             XuatDoanhThu doanhThu = new XuatDoanhThu();
             doanhThu.show();
         }
@@ -601,9 +604,10 @@ public class StaffPage extends javax.swing.JFrame {
                     sfs.show();
                 }
             }
-            
+
         } catch (IOException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(StaffPage.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Không thể truy cập vào trang Hỗ trợ Khách Hàng", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnChatActionPerformed
 
@@ -624,6 +628,8 @@ public class StaffPage extends javax.swing.JFrame {
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(StaffPage.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Không thể truy cập vào trang Quản lý Dịch Vụ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+
         }
     }//GEN-LAST:event_btnMembershipActionPerformed
 
@@ -645,6 +651,8 @@ public class StaffPage extends javax.swing.JFrame {
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(StaffPage.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Không thể truy cập vào trang Mua Hàng", "Lỗi", JOptionPane.ERROR_MESSAGE);
+
         }
     }//GEN-LAST:event_btnPaymentActionPerformed
 
@@ -666,6 +674,7 @@ public class StaffPage extends javax.swing.JFrame {
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(StaffPage.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Không thể truy cập vào trang Quản lý Mã giảm giá", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnDiscountActionPerformed
 
@@ -687,6 +696,8 @@ public class StaffPage extends javax.swing.JFrame {
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(StaffPage.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Không thể truy cập vào trang Quản lý Sản phẩm", "Lỗi", JOptionPane.ERROR_MESSAGE);
+
         }
     }//GEN-LAST:event_btnProductActionPerformed
 
@@ -706,9 +717,10 @@ public class StaffPage extends javax.swing.JFrame {
                     cM.show();
                 }
             }
-            
+
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(StaffPage.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Không thể truy cập vào trang Quản lý Khóa tập", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnClassActionPerformed
 
@@ -736,6 +748,7 @@ public class StaffPage extends javax.swing.JFrame {
             roomManagement.show();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(StaffPage.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Không thể truy cập vào trang Quản lý Phòng tập", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnRoomActionPerformed
 
@@ -757,21 +770,21 @@ public class StaffPage extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                    
+
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(StaffPage.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(StaffPage.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(StaffPage.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(StaffPage.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -783,11 +796,11 @@ public class StaffPage extends javax.swing.JFrame {
             try {
                 try {
                     new StaffPage().setVisible(true);
-                    
+
                 } catch (FileNotFoundException | SQLException | ClassNotFoundException ex) {
                     Logger.getLogger(StaffPage.class
                             .getName()).log(Level.SEVERE, null, ex);
-                    
+
                 }
             } catch (IOException ex) {
                 Logger.getLogger(StaffPage.class

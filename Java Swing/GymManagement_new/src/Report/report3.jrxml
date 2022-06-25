@@ -5,21 +5,19 @@
 	<property name="ireport.y" value="0"/>
 	<parameter name="parameter1" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT P.PAYMENT_ID,PRODUCT_NAME,AMOUNT,P.STAFF_ID,
+		<![CDATA[SELECT P.PAYMENT_ID,PRODUCT_NAME,AMOUNT,
 C.CUS_NAME,CUS_TYPE,PD.PRODUCT_ID,PAYMENT_MODE,PRODUCT_PRICE,PAYMENT_MODE,
 product_price*amount,total
-FROM PAYMENT P, PRODUCT PR, PAYMENT_DETAIL PD,STAFF S, CUSTOMER C
+FROM PAYMENT P, PRODUCT PR, PAYMENT_DETAIL PD, CUSTOMER C
 WHERE
     P.PAYMENT_ID=PD.PAYMENT_ID
     AND PR.PRODUCT_ID=PD.PRODUCT_ID
     AND P.CUS_ID=C.CUS_ID
-    AND S.STAFF_ID=P.STAFF_ID
     AND P.PAYMENT_ID=$P{parameter1}]]>
 	</queryString>
 	<field name="PAYMENT_ID" class="java.math.BigDecimal"/>
 	<field name="PRODUCT_NAME" class="java.lang.String"/>
 	<field name="AMOUNT" class="java.math.BigDecimal"/>
-	<field name="STAFF_ID" class="java.math.BigDecimal"/>
 	<field name="CUS_NAME" class="java.lang.String"/>
 	<field name="CUS_TYPE" class="java.lang.String"/>
 	<field name="PRODUCT_ID" class="java.math.BigDecimal"/>
@@ -33,26 +31,26 @@ WHERE
 	<title>
 		<band height="118" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="84" width="305" height="32" uuid="02d052b7-8bf0-4bfa-a728-43c21def905b"/>
+				<reportElement x="0" y="72" width="305" height="32" uuid="02d052b7-8bf0-4bfa-a728-43c21def905b"/>
 				<textElement textAlignment="Center">
 					<font size="24" isBold="true"/>
 				</textElement>
 				<text><![CDATA[PHIẾU MUA HÀNG]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="30" width="305" height="21" uuid="a51dbc1a-2da8-4536-af53-058d6faa0b56"/>
+				<reportElement x="0" y="20" width="305" height="21" uuid="a51dbc1a-2da8-4536-af53-058d6faa0b56"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Khu phố 3, phường Chánh Phú Hòa, thị xã Bến Cát, Bình Dương]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="10" width="305" height="20" uuid="4a92b0f9-6a28-44bb-b449-3a1c03c7f733"/>
+				<reportElement x="0" y="0" width="305" height="20" uuid="4a92b0f9-6a28-44bb-b449-3a1c03c7f733"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[VIETGYM]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="51" width="305" height="20" uuid="8827c24c-7e84-4773-981f-e70d29bdc0bc"/>
+				<reportElement x="0" y="41" width="305" height="20" uuid="8827c24c-7e84-4773-981f-e70d29bdc0bc"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[0347712598]]></text>
 			</staticText>
@@ -192,7 +190,7 @@ WHERE
 	<columnFooter>
 		<band height="54" splitType="Stretch">
 			<textField>
-				<reportElement x="205" y="11" width="100" height="20" uuid="a35ffc51-d701-44e8-83e8-2474cf3853a7"/>
+				<reportElement x="160" y="11" width="100" height="20" uuid="a35ffc51-d701-44e8-83e8-2474cf3853a7"/>
 				<box rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
@@ -200,20 +198,28 @@ WHERE
 				<textFieldExpression><![CDATA[$F{TOTAL}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="160" y="11" width="100" height="20" uuid="07a9032e-73fd-4a1f-af83-a85059f0dd2c"/>
+				<reportElement x="179" y="11" width="100" height="20" uuid="07a9032e-73fd-4a1f-af83-a85059f0dd2c"/>
 				<text><![CDATA[Tổng]]></text>
 			</staticText>
 			<line>
 				<reportElement x="0" y="37" width="305" height="1" uuid="739fd334-dd1c-4a66-b6cb-89862224c29e"/>
 			</line>
+			<textField>
+				<reportElement x="60" y="11" width="100" height="20" uuid="a5917d74-bfa4-42e8-8635-946c4583408f"/>
+				<textFieldExpression><![CDATA[$F{PAYMENT_ID}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="260" y="11" width="45" height="20" uuid="e50e7d02-8c98-46b0-8d48-f547e129ecbf"/>
+				<text><![CDATA[VNĐ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="11" width="60" height="20" uuid="3928a067-9121-450b-8662-7a3f7d904fd6"/>
+				<text><![CDATA[Số hóa đơn]]></text>
+			</staticText>
 		</band>
 	</columnFooter>
 	<pageFooter>
 		<band height="148" splitType="Stretch">
-			<textField>
-				<reportElement x="68" y="0" width="100" height="20" uuid="6ddeedae-75b8-403a-834c-9f9ccaaeb7f8"/>
-				<textFieldExpression><![CDATA[$F{STAFF_ID}]]></textFieldExpression>
-			</textField>
 			<textField pattern="dd/MM/yyyy h.mm a">
 				<reportElement x="200" y="0" width="100" height="20" uuid="7139aae7-6b3c-4421-9037-e4216b3187a5"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
@@ -234,10 +240,6 @@ WHERE
 					<jr:codeExpression><![CDATA["1234"]]></jr:codeExpression>
 				</jr:barbecue>
 			</componentElement>
-			<staticText>
-				<reportElement x="0" y="0" width="100" height="20" uuid="d90063d4-db90-48ec-9161-21c210ae05e3"/>
-				<text><![CDATA[Mã thu ngân]]></text>
-			</staticText>
 		</band>
 	</pageFooter>
 </jasperReport>

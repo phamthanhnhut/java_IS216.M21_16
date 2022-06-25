@@ -72,7 +72,7 @@ public class CustomerPage extends javax.swing.JFrame {
 
     private void getCustomerPage() throws ClassNotFoundException, ParseException {
         try {
-
+            String m = "";
             ResultSet rs = Customer.getCustomerforPage();
             ResultSet rs1 = Customer.getMembershipforPage(SDT_cus);
             while (rs.next()) {
@@ -101,7 +101,13 @@ public class CustomerPage extends javax.swing.JFrame {
                 txtRevenue.setText(rs.getString("cus_revenue"));
             }
             if (rs1.next()) {
-                txtMembership.setText(rs1.getString("mem_bonus"));
+                m = rs1.getString("mem_bonus");
+                txtMembership.setText(m);
+                return;
+            }
+            if (m.equals("")) {
+                btnCancelMem.setEnabled(false);
+                btnExport.setEnabled(false);
             }
         } catch (HeadlessException | SQLException ex) {
             JOptionPane.showMessageDialog(this, ex, "Lỗi", JOptionPane.ERROR_MESSAGE);
@@ -927,7 +933,7 @@ public class CustomerPage extends javax.swing.JFrame {
 
     private void btnMembershipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMembershipActionPerformed
         try {
-            if (!txtMembership.getText().equals("Khách hàng CHƯA ĐĂNG KÝ dịch vụ")) {
+            if (!txtMembership.getText().equals("Khách hàng CHƯA ĐĂNG KÝ dịch vụ\n")) {
                 JOptionPane.showMessageDialog(this, "Không thể đăng ký dịch vụ mới, vui lòng Hủy dịch vụ đang sử dụng!", "Đăng ký dịch vụ", JOptionPane.ERROR_MESSAGE);
             } else {
                 MembershipForm mf = new MembershipForm();
@@ -935,7 +941,7 @@ public class CustomerPage extends javax.swing.JFrame {
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CustomerPage.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }        
     }//GEN-LAST:event_btnMembershipActionPerformed
 
     private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOutActionPerformed
@@ -1095,7 +1101,7 @@ public class CustomerPage extends javax.swing.JFrame {
                 if (btn == JOptionPane.YES_OPTION) {
 //                    Membership.deleteMembership();
                     JOptionPane.showMessageDialog(this, "Hủy dịch vụ thành công!");
-                    txtMembership.setText("Khách hàng CHƯA ĐĂNG KÝ dịch vụ");
+                    txtMembership.setText("Khách hàng CHƯA ĐĂNG KÝ dịch vụ\n");
                     btnCancelMem.setEnabled(false);
                     btnExport.setEnabled(false);
                 } else if (btn == JOptionPane.NO_OPTION) {
@@ -1113,7 +1119,12 @@ public class CustomerPage extends javax.swing.JFrame {
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         try {
             // TODO add your handling code here:
-            getCustomerPage();
+            if (txtMembership.equals("Khách hàng CHƯA ĐĂNG KÝ dịch vụ\n")) {
+                btnCancelMem.setEnabled(false);
+                btnExport.setEnabled(false);
+            } else {
+                getCustomerPage();
+            }
         } catch (ClassNotFoundException | ParseException ex) {
             Logger.getLogger(CustomerPage.class.getName()).log(Level.SEVERE, null, ex);
         }

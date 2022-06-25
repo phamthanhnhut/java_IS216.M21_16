@@ -48,8 +48,8 @@ WHERE STAFF_ID=$P{STAFF_ID}]]>
 	<detail>
 		<band height="125" splitType="Stretch">
 			<textField>
-				<reportElement x="305" y="45" width="205" height="80" uuid="80397f34-f2f7-4f7e-a715-8ee859555511"/>
-				<textElement>
+				<reportElement x="243" y="45" width="162" height="80" uuid="80397f34-f2f7-4f7e-a715-8ee859555511"/>
+				<textElement textAlignment="Center">
 					<font size="48" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{STAFF_ID}]]></textFieldExpression>
@@ -83,7 +83,7 @@ WHERE STAFF_ID=$P{STAFF_ID}]]>
 				<text><![CDATA[Số điện thoại]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="100" y="60" width="100" height="20" uuid="a4718d15-eef3-4072-992c-8e47f1e8b258"/>
+				<reportElement x="122" y="60" width="73" height="20" uuid="a4718d15-eef3-4072-992c-8e47f1e8b258"/>
 				<textFieldExpression><![CDATA[$F{STAFF_TELEPHONE}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -95,11 +95,15 @@ WHERE STAFF_ID=$P{STAFF_ID}]]>
 				<textFieldExpression><![CDATA[$F{STAFF_ADDRESS}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="305" y="0" width="100" height="20" uuid="eb4ff370-49d8-4dfe-8f2b-8179ab437ff9"/>
-				<textElement>
+				<reportElement x="243" y="0" width="162" height="20" uuid="eb4ff370-49d8-4dfe-8f2b-8179ab437ff9"/>
+				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Mã số]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="60" width="27" height="20" uuid="99af811b-4073-4941-aeda-5f1c7e0c79d7"/>
+				<text><![CDATA[+84]]></text>
 			</staticText>
 		</band>
 	</detail>

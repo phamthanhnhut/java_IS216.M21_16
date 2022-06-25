@@ -5,17 +5,15 @@
 	<property name="ireport.y" value="0"/>
 	<parameter name="parameter1" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT P.PAYMENT_ID, P.STAFF_ID, CUS_NAME, CUS_TYPE,PAYMENT_MODE,SC.CLASS_ID,CLASS_TITLE, CLASS_COST,TOTAL
+		<![CDATA[SELECT DISTINCT P.PAYMENT_ID, CUS_NAME, CUS_TYPE,PAYMENT_MODE,SC.CLASS_ID,CLASS_TITLE, CLASS_COST,TOTAL
 FROM CLASS CL, PAYMENT P, SIGNUP_CLASS SC, CUSTOMER C, STAFF S
 WHERE 
 	P.PAYMENT_ID=SC.PAYMENT_ID 
 	AND SC.CLASS_ID=CL.CLASS_ID
 	AND P.CUS_ID=C.CUS_ID
-	AND S.STAFF_ID=P.STAFF_ID
 	AND P.PAYMENT_ID=$P{parameter1}]]>
 	</queryString>
 	<field name="PAYMENT_ID" class="java.math.BigDecimal"/>
-	<field name="STAFF_ID" class="java.math.BigDecimal"/>
 	<field name="CUS_NAME" class="java.lang.String"/>
 	<field name="CUS_TYPE" class="java.lang.String"/>
 	<field name="PAYMENT_MODE" class="java.lang.String"/>
@@ -29,8 +27,8 @@ WHERE
 	<title>
 		<band height="116" splitType="Stretch">
 			<staticText>
-				<reportElement x="50" y="76" width="213" height="32" uuid="f0ec8707-2b82-4711-a707-fe3b37e519b7"/>
-				<textElement>
+				<reportElement x="2" y="76" width="303" height="32" uuid="f0ec8707-2b82-4711-a707-fe3b37e519b7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="24" isBold="true"/>
 				</textElement>
 				<text><![CDATA[PHIẾU ĐĂNG KÍ]]></text>
@@ -161,21 +159,24 @@ WHERE
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="67" splitType="Stretch">
+		<band height="102" splitType="Stretch">
 			<textField>
-				<reportElement x="205" y="14" width="100" height="20" uuid="1dbdde0b-682b-4606-a911-476f74634caf"/>
+				<reportElement x="205" y="45" width="100" height="20" uuid="1dbdde0b-682b-4606-a911-476f74634caf"/>
 				<box rightPadding="5"/>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{TOTAL}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="192" y="14" width="100" height="20" uuid="685bc3e3-d3ce-4018-96cb-d0c5757c5cb8"/>
+				<reportElement x="150" y="45" width="100" height="20" uuid="685bc3e3-d3ce-4018-96cb-d0c5757c5cb8"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
 				<text><![CDATA[Tổng tiền]]></text>
 			</staticText>
 			<line>
-				<reportElement x="2" y="44" width="303" height="1" uuid="539960fe-35b9-4bf3-85df-6da2abf4d00e"/>
+				<reportElement x="2" y="80" width="303" height="1" uuid="539960fe-35b9-4bf3-85df-6da2abf4d00e"/>
 			</line>
 		</band>
 	</columnFooter>
@@ -193,16 +194,14 @@ WHERE
 			</componentElement>
 			<staticText>
 				<reportElement x="117" y="108" width="75" height="20" uuid="81a96fc9-8a89-4fff-9949-dc9cf727c8ac"/>
+				<textElement textAlignment="Center"/>
 				<text><![CDATA[Hẹn gặp lại <3]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="92" y="88" width="123" height="20" uuid="fe95a849-b216-4249-9a9d-7c0cb9900389"/>
+				<textElement textAlignment="Center"/>
 				<text><![CDATA[CẢM ƠN QUÝ KHÁCH !	]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="2" y="0" width="100" height="20" uuid="771a6caa-0571-42d2-a6a4-faf3557b9105"/>
-				<textFieldExpression><![CDATA[$F{STAFF_ID}]]></textFieldExpression>
-			</textField>
 		</band>
 	</pageFooter>
 </jasperReport>

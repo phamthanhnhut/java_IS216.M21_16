@@ -5,6 +5,7 @@
 package Processes;
 
 import ConnectDB.ConnectionUtils;
+import Views.CustomerPage;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -29,7 +30,7 @@ public class Membership {
 
             Statement stat_temp = conn.createStatement();
             stat_temp.executeUpdate("SELECT * FROM SIGNUP_MEMBERSHIP ORDER BY payment_id");
-            
+                      
             i++;
 
         } catch (ClassNotFoundException | SQLException ex) {

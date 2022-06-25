@@ -161,7 +161,7 @@ order by class_id]]>
 				<text><![CDATA[DANH SÁCH CÁC KHÓA TẬP]]></text>
 			</staticText>
 			<image>
-				<reportElement x="7" y="0" width="193" height="30" uuid="f2bf0cdd-95dc-43a7-b131-e2656a5f3ae8"/>
+				<reportElement x="0" y="0" width="193" height="30" uuid="f2bf0cdd-95dc-43a7-b131-e2656a5f3ae8"/>
 				<imageExpression><![CDATA["E:\\USB\\Documents\\Nam 2\\HK2\\Programming Java\\TH\\DoAn\\Java Swing\\GymManagement_new\\src\\Report\\Logo.jpg"]]></imageExpression>
 			</image>
 			<staticText>

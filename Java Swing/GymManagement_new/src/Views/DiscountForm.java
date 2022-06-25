@@ -414,6 +414,8 @@ public class DiscountForm extends javax.swing.JFrame {
     }
 
     private void resetDiscount() {
+        tbDiscount.setDefaultEditor(Object.class, null);
+        txtSearch.setText("SEARCH");
         txtCode.setText(null);
         txtPercent.setText(null);
         txtCode.setEditable(false);

@@ -502,7 +502,7 @@ public class StaffForm extends javax.swing.JFrame {
         jPanel2.setForeground(new java.awt.Color(221, 229, 232));
 
         txtSearch.setBackground(new java.awt.Color(134, 1, 4));
-        txtSearch.setFont(new java.awt.Font("#9Slide03 IcielSmoothy Sans", 0, 36)); // NOI18N
+        txtSearch.setFont(new java.awt.Font("#9Slide03 Roboto Condensed Bold", 0, 36)); // NOI18N
         txtSearch.setForeground(new java.awt.Color(255, 255, 255));
         txtSearch.setText("SEARCH");
         txtSearch.setBorder(null);
@@ -752,6 +752,7 @@ public class StaffForm extends javax.swing.JFrame {
     }
 
     private void resetStaff() {
+        tbStaff.setDefaultEditor(Object.class, null);
         txtName.setText("");
         txtAddress.setText("");
         txtTelephone.setText("");
@@ -827,7 +828,7 @@ public class StaffForm extends javax.swing.JFrame {
             String namKN = txtExperience.getText();
 
             Staff nhanVien = new Staff();
-           
+
             int capnhatNV = nhanVien.updateStaff(tenNV, sBirthday, sDateJoined,
                     gioiTinh, diaChi, SDT, tienLuong, viTri, chuyenMon, namKN);
 
