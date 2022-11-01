@@ -480,6 +480,8 @@ public class StaffPage extends javax.swing.JFrame {
         btnStaff.setEnabled(false);
         btnRoom.setEnabled(false);
         btnSales.setEnabled(false);
+        btnMembership.setEnabled(false);
+        btnDiscount.setEnabled(false);
     }
 
     private void getStaffPage() throws ClassNotFoundException {
