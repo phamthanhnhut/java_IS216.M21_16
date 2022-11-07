@@ -161,7 +161,6 @@ public class CustomerPage extends javax.swing.JFrame {
         jSeparator10 = new javax.swing.JSeparator();
         jLabel16 = new javax.swing.JLabel();
         txtType = new javax.swing.JTextField();
-        btnUpdate = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnLogOut = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -355,16 +354,6 @@ public class CustomerPage extends javax.swing.JFrame {
         txtType.setForeground(new java.awt.Color(134, 1, 4));
         txtType.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        btnUpdate.setBackground(new java.awt.Color(221, 229, 232));
-        btnUpdate.setFont(new java.awt.Font("#9Slide03 Neutra", 0, 12)); // NOI18N
-        btnUpdate.setForeground(new java.awt.Color(134, 1, 4));
-        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/icons8-edit-30.png"))); // NOI18N
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -428,17 +417,14 @@ public class CustomerPage extends javax.swing.JFrame {
                                         .addComponent(txtWeight, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel14)))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnUpdate)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(36, 36, 36))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addGap(56, 56, 56)
-                                .addComponent(txtRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel10))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -524,8 +510,6 @@ public class CustomerPage extends javax.swing.JFrame {
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnUpdate)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -898,14 +882,14 @@ public class CustomerPage extends javax.swing.JFrame {
                                 .addComponent(lbTime)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnChangePassword, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnLogOut, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtName1)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -984,36 +968,6 @@ public class CustomerPage extends javax.swing.JFrame {
             Logger.getLogger(CustomerPage.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSupportActionPerformed
-
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        try {
-            // TODO add your handling code here:
-            String tenKH = txtName.getText();
-            String dc = txtAddress.getText();
-            String sdt = txtTelephone.getText();
-            Date birthday = dcBirthday.getDate();
-            String sBirthday = String.format("%1$td/%1$tm/%1$tY", birthday);
-            String gioiTinh = txtGender.getText();
-
-            if (sdt.length() == 9) {
-                int capnhatKhachHang = new Customer(SDT_cus).updateCustomer(tenKH, sBirthday, gioiTinh, dc, sdt);
-
-                if (capnhatKhachHang > 0) {
-                    JOptionPane.showMessageDialog(this, "Cập nhật Khách Hàng THÀNH CÔNG!");
-                } else {
-                    JOptionPane.showMessageDialog(this, "Cập nhật Khách Hàng THẤT BẠI!",
-                            "Lỗi", JOptionPane.ERROR_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "Cập nhật Khách Hàng THẤT BẠI!",
-                        "Lỗi", JOptionPane.ERROR_MESSAGE);
-            }
-
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(CustomerForm.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(rootPane, ex, "Lỗi", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePasswordActionPerformed
         // TODO add your handling code here:
@@ -1178,7 +1132,6 @@ public class CustomerPage extends javax.swing.JFrame {
     private javax.swing.JButton btnMembership;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSupport;
-    private javax.swing.JButton btnUpdate;
     private com.toedter.calendar.JDateChooser dcBirthday;
     private com.toedter.calendar.JDateChooser dcDateJoin;
     private com.toedter.calendar.JDateChooser dcExpired;
