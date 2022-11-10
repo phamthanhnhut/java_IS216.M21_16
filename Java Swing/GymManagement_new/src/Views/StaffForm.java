@@ -780,15 +780,28 @@ public class StaffForm extends javax.swing.JFrame {
             // TODO add your handling code here:
             String SDT = txtTelephone.getText();
 
+            Object[] options = {"Có", "Không", "Hủy"};
+
             Staff nhanVien = new Staff();
-            int demXoaNV = nhanVien.deleteStaff(SDT);
-            if (demXoaNV > 0) {
-                JOptionPane.showMessageDialog(this, "Xóa Nhân Viên THÀNH CÔNG!");
-                resetStaff();
+
+            int result = JOptionPane.showOptionDialog(rootPane,
+                    "Bạn có chắc muốn xóa nhân viên +84" + SDT + " hay không?",
+                    "Xóa khách hàng", JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
+            if (result == JOptionPane.YES_OPTION) {
+                int demXoaNV = nhanVien.deleteStaff(SDT);
+                if (demXoaNV > 0) {
+                    JOptionPane.showMessageDialog(this, "Xóa Nhân Viên THÀNH CÔNG!");
+                    resetStaff();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xóa Nhân Viên THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    resetStaff();
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Xóa Nhân Viên THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-                resetStaff();
+                JOptionPane.showMessageDialog(this, "Hủy thao tác xóa nhân viên");
             }
+
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(StaffForm.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(rootPane, ex, "Lỗi", JOptionPane.ERROR_MESSAGE);

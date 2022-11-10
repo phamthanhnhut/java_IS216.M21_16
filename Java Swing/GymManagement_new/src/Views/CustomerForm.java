@@ -800,16 +800,29 @@ public class CustomerForm extends javax.swing.JFrame {
             // TODO add your handling code here:
             String SDT = txtTelephone.getText();
 
+            Object[] options = {"Có", "Không", "Hủy"};
+
             Customer khachHang = new Customer();
 
-            int xoaKhachHang = khachHang.deleteCustomer(SDT);
+            int result = JOptionPane.showOptionDialog(rootPane,
+                    "Bạn có chắc muốn xóa khách hàng +84" + SDT + " hay không?",
+                    "Xóa khách hàng", JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
-            if (xoaKhachHang > 0) {
-                JOptionPane.showMessageDialog(this, "Xóa Khách Hàng THÀNH CÔNG!");
-                resetCustomer();
+            if (result == JOptionPane.YES_OPTION) {
+
+                int xoaKhachHang = khachHang.deleteCustomer(SDT);
+                if (xoaKhachHang > 0) {
+                    JOptionPane.showMessageDialog(this, "Xóa Khách Hàng THÀNH CÔNG!");
+                    resetCustomer();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xóa Khách Hàng THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+
             } else {
-                JOptionPane.showMessageDialog(this, "Xóa Khách Hàng THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Hủy thao tác xóa khách hàng!");
             }
+
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(CustomerForm.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(rootPane, ex, "Lỗi", JOptionPane.ERROR_MESSAGE);

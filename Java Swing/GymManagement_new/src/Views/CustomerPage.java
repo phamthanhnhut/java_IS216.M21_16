@@ -68,6 +68,10 @@ public class CustomerPage extends javax.swing.JFrame {
         txtType.setEditable(false);
         txtRevenue.setEditable(false);
         txtMembership.setEditable(false);
+        txtTelephone.setEditable(false);
+        txtGender.setEditable(false);
+        txtName.setEditable(false);
+        txtAddress.setEditable(false);
     }
 
     private void getCustomerPage() throws ClassNotFoundException, ParseException {
