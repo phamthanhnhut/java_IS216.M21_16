@@ -472,15 +472,27 @@ public class DiscountForm extends javax.swing.JFrame {
 
             Discount giamgia = new Discount();
 
-            int xoaGG = giamgia.deleteDiscount(code);
+            Object[] options = {"Có", "Không", "Hủy"};
+            int result = JOptionPane.showOptionDialog(rootPane,
+                    "Bạn có chắc muốn thêm sản phẩm " + code + " hay không?",
+                    "Thêm sản phẩm", JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
-            if (xoaGG > 0) {
-                JOptionPane.showMessageDialog(this, "Xóa Mã giảm giá THÀNH CÔNG!");
-                setTableDiscount();
-                resetDiscount();
+            if (result == JOptionPane.YES_OPTION) {
+                int xoaGG = giamgia.deleteDiscount(code);
+
+                if (xoaGG > 0) {
+                    JOptionPane.showMessageDialog(this, "Xóa Mã giảm giá THÀNH CÔNG!");
+                    setTableDiscount();
+                    resetDiscount();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xóa Mã giảm giá THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Xóa Mã giảm giá THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Hủy thao tác xóa mã giảm giá", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                resetDiscount();
             }
+
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(DiscountForm.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(rootPane, ex, "Lỗi", JOptionPane.ERROR_MESSAGE);
@@ -499,16 +511,26 @@ public class DiscountForm extends javax.swing.JFrame {
             String codeGG = txtCode.getText();
             String percent = txtPercent.getText();
 
+            Object[] options = {"Có", "Không", "Hủy"};
+            int result = JOptionPane.showOptionDialog(rootPane,
+                    "Bạn có chắc muốn thêm mã giảm giá " + codeGG + " hay không?",
+                    "Thêm sản phẩm", JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
             Discount giamgia = new Discount();
 
-            int themGG = giamgia.addDiscount(codeGG, percent);
+            if (result == JOptionPane.YES_OPTION) {
+                int themGG = giamgia.addDiscount(codeGG, percent);
 
-            if (themGG > 0 && codeGG.length() == 10) {
-                JOptionPane.showMessageDialog(this, "Thêm Mã giảm giá THÀNH CÔNG!");
-                setTableDiscount();
-                resetDiscount();
+                if (themGG > 0 && codeGG.length() == 10) {
+                    JOptionPane.showMessageDialog(this, "Thêm Mã giảm giá THÀNH CÔNG!");
+                    setTableDiscount();
+                    resetDiscount();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Thêm Mã giảm giá THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Thêm Mã giảm giá THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Hủy thao tác thêm mã sản phẩm!");
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DiscountForm.class.getName()).log(Level.SEVERE, null, ex);
