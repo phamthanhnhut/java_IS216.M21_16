@@ -232,7 +232,7 @@ public class ProductManagement extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
@@ -392,7 +392,7 @@ public class ProductManagement extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -454,7 +454,7 @@ public class ProductManagement extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -492,16 +492,29 @@ public class ProductManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+
+        String tenHangHoa = txtName.getText();
+
+        Object[] options = {"Có", "Không", "Hủy"};
+        int result = JOptionPane.showOptionDialog(rootPane,
+                "Bạn có chắc muốn thêm sản phẩm " + tenHangHoa + " hay không?",
+                "Thêm sản phẩm", JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
         if (checkNull()) {
-            int i = Product.deleteProduct(maHangHoa);
-            if (i > 0) {
-                modelProduct.setRowCount(0);
-                setTableProduct();
-                JOptionPane.showMessageDialog(this, "Xóa sản phẩm THÀNH CÔNG!");
-                resetProduct();
+            if (result == JOptionPane.YES_OPTION) {
+                int i = Product.deleteProduct(maHangHoa);
+                if (i > 0) {
+                    modelProduct.setRowCount(0);
+                    setTableProduct();
+                    JOptionPane.showMessageDialog(this, "Xóa sản phẩm THÀNH CÔNG!");
+                    resetProduct();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xóa sản phẩm THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    resetProduct();
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Xóa sản phẩm THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-                resetProduct();
+                JOptionPane.showMessageDialog(this, "Hủy thao tác xóa sản phẩm!");
             }
         } else {
             JOptionPane.showMessageDialog(this, "Không tồn tại sản phẩm cần xóa", "Lỗi", JOptionPane.ERROR_MESSAGE);
@@ -514,16 +527,27 @@ public class ProductManagement extends javax.swing.JFrame {
         String giaTien = txtPrice.getText();
         String loaiHangHoa = cbxType.getSelectedItem().toString();
         String soLuong = txtAmount.getText();
+
+        Object[] options = {"Có", "Không", "Hủy"};
+        int result = JOptionPane.showOptionDialog(rootPane,
+                "Bạn có chắc muốn thêm sản phẩm " + tenHangHoa + " hay không?",
+                "Thêm sản phẩm", JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
         if (checkNull()) {
-            int i = Product.addProduct(tenHangHoa, giaTien, loaiHangHoa, soLuong);
-            if (i > 0) {
-                modelProduct.setRowCount(0);
-                setTableProduct();
-                JOptionPane.showMessageDialog(this, "Thêm sản phẩm THÀNH CÔNG!");
-                resetProduct();
+            if (result == JOptionPane.YES_OPTION) {
+                int i = Product.addProduct(tenHangHoa, giaTien, loaiHangHoa, soLuong);
+                if (i > 0) {
+                    modelProduct.setRowCount(0);
+                    setTableProduct();
+                    JOptionPane.showMessageDialog(this, "Thêm sản phẩm THÀNH CÔNG!");
+                    resetProduct();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Thêm sản phẩm THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    resetProduct();
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Thêm sản phẩm THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-                resetProduct();
+                JOptionPane.showMessageDialog(this, "Hủy thao tác thêm sản phẩm!");
             }
         } else {
             JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin", "Lỗi", JOptionPane.ERROR_MESSAGE);
