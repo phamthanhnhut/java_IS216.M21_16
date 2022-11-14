@@ -374,7 +374,7 @@
                                       <Component id="btnAddDiscount" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="60" max="32767" attributes="0"/>
+                              <EmptySpace pref="68" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
@@ -607,7 +607,7 @@
                           <Group type="102" attributes="0">
                               <Component id="btnRefresh" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnAddPayment" pref="211" max="32767" attributes="0"/>
+                              <Component id="btnAddPayment" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -632,7 +632,7 @@
                               <Component id="btnSave" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="12" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -797,7 +797,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Resources/icons8-cancel-64.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="X&#xf3;a &#x111;&#x1a1;n h&#xe0;ng"/>
+                <Property name="text" type="java.lang.String" value="X&#xd3;A &#x110;&#x1a0;N H&#xc0;NG"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeletePaymentActionPerformed"/>

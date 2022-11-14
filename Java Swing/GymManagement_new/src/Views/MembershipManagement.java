@@ -329,10 +329,10 @@ public class MembershipManagement extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnDelete)
-                    .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -446,11 +446,10 @@ public class MembershipManagement extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lbExit)
-                        .addComponent(lvMinimize, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbExit)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtSearch))
+                    .addComponent(txtSearch)
+                    .addComponent(lvMinimize, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
                 .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -505,38 +504,61 @@ public class MembershipManagement extends javax.swing.JFrame {
                 String tenDichVu = txtBonus.getText();
                 String giaTien = txtCost.getText();
 
-                int themDV = Membership.addMembershipforStaff(rank, tenDichVu, giaTien);
-                if (themDV > 0) {
-                    modelMembership.setRowCount(0);
-                    setTableMembership();
-                    JOptionPane.showMessageDialog(this, "Thêm Khóa Tập THÀNH CÔNG!");
-                    resetClass();
+                Object[] options = {"Có", "Không", "Hủy"};
+                int result = JOptionPane.showOptionDialog(rootPane,
+                        "Bạn có chắc muốn thêm dịch vụ " + tenDichVu + " hay không?",
+                        "Thêm dịch vụ", JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
+                if (result == JOptionPane.YES_OPTION) {
+                    int themDV = Membership.addMembershipforStaff(rank, tenDichVu, giaTien);
+                    if (themDV > 0) {
+                        modelMembership.setRowCount(0);
+                        setTableMembership();
+                        JOptionPane.showMessageDialog(this, "Thêm Dịch vụ THÀNH CÔNG!");
+                        resetClass();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Thêm Dịch vụ THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                        resetClass();
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(this, "Thêm Khóa Tập THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-                    resetClass();
+                    JOptionPane.showMessageDialog(this, "Hủy thao tác thêm Dịch vụ!");
                 }
+
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ClassManagement.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "Thêm Khóa Tập THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Thêm Dịch vụ THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         try {
-            int xoaMem = Membership.deleteMembership(maDichVu);
-            if (xoaMem > 0) {
-                modelMembership.setRowCount(0);
-                setTableMembership();
-                JOptionPane.showMessageDialog(this, "Xóa Khóa Tập THÀNH CÔNG!");
-                resetClass();
+            String tenDichVu = txtBonus.getText();
+            Object[] options = {"Có", "Không", "Hủy"};
+            int result = JOptionPane.showOptionDialog(rootPane,
+                    "Bạn có chắc muốn xóa dịch vụ " + tenDichVu + " hay không?",
+                    "Xóa dịch vụ", JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
+            if (result == JOptionPane.YES_OPTION) {
+                int xoaMem = Membership.deleteMembership(maDichVu);
+                if (xoaMem > 0) {
+                    modelMembership.setRowCount(0);
+                    setTableMembership();
+                    JOptionPane.showMessageDialog(this, "Xóa Dịch vụ THÀNH CÔNG!");
+                    resetClass();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xóa Dịch vụ THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    resetClass();
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Xóa Khóa Tập THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-                resetClass();
+                JOptionPane.showMessageDialog(this, "Hủy thao tác xóa Dịch vụ!");
             }
+
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ClassManagement.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Xóa Khóa Tập THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Xóa Dịch vụ THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
 
         }
     }//GEN-LAST:event_btnDeleteActionPerformed

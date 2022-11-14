@@ -369,16 +369,26 @@ public class RoomManagement extends javax.swing.JFrame {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         try {
-            int i = Room.deleteRoom(maPhongTap);
-            if (i > 0) {
-                modelRoom.setRowCount(0);
-                setTableRoom();
-                JOptionPane.showMessageDialog(this, "Xóa phòng tập THÀNH CÔNG!");
-                resetClass();
+            Object[] options = {"Có", "Không", "Hủy"};
+            int result = JOptionPane.showOptionDialog(rootPane,
+                    "Bạn có chắc muốn xóa phòng tập số" + maPhongTap + " hay không?",
+                    "Xóa phòng tập", JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+            if (result == JOptionPane.YES_OPTION) {
+                int i = Room.deleteRoom(maPhongTap);
+                if (i > 0) {
+                    modelRoom.setRowCount(0);
+                    setTableRoom();
+                    JOptionPane.showMessageDialog(this, "Xóa phòng tập THÀNH CÔNG!");
+                    resetClass();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xóa phòng tập THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    resetClass();
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Xóa phòng tập THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-                resetClass();
+                JOptionPane.showMessageDialog(this, "Hủy thao tác thêm phòng tập!");
             }
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RoomManagement.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "Xóa phòng tập THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
@@ -388,16 +398,25 @@ public class RoomManagement extends javax.swing.JFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         try {
-            String suaChua = txtCapacity.getText();
-            int i = Room.addRoom(suaChua);
-            if (i > 0) {
-                modelRoom.setRowCount(0);
-                setTableRoom();
-                JOptionPane.showMessageDialog(this, "Thêm Phòng tập THÀNH CÔNG!");
-                resetClass();
+            String sucChua = txtCapacity.getText();
+            Object[] options = {"Có", "Không", "Hủy"};
+            int result = JOptionPane.showOptionDialog(rootPane,
+                    "Bạn có chắc muốn thêm phòng tập có sỉ số " + sucChua + " hay không?",
+                    "Thêm phòng tập", JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+            if (result == JOptionPane.YES_OPTION) {
+                int i = Room.addRoom(sucChua);
+                if (i > 0) {
+                    modelRoom.setRowCount(0);
+                    setTableRoom();
+                    JOptionPane.showMessageDialog(this, "Thêm Phòng tập THÀNH CÔNG!");
+                    resetClass();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Thêm Phòng tập THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    resetClass();
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Thêm Phòng tập THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-                resetClass();
+                JOptionPane.showMessageDialog(this, "Hủy thao tác thêm phòng tập!");
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RoomManagement.class.getName()).log(Level.SEVERE, null, ex);

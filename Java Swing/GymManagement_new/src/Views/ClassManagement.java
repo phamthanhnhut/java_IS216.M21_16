@@ -549,21 +549,29 @@ public class ClassManagement extends javax.swing.JFrame {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         try {
             Class cl = new Class();
-            int xoaClass = cl.deleteClass(maKhoaTap);
-            if (xoaClass > 0) {
-                modelClass.setRowCount(0);
-                setTableClass();
-                JOptionPane.showMessageDialog(this, "Xóa Khóa Tập THÀNH CÔNG!");
-                resetClass();
+            Object[] options = {"Có", "Không", "Hủy"};
+            int result = JOptionPane.showOptionDialog(rootPane,
+                    "Bạn có chắc muốn xóa khóa tập số" + maKhoaTap + " hay không?",
+                    "Xóa khóa tập", JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+            if (result == JOptionPane.YES_OPTION) {
+                int xoaClass = cl.deleteClass(maKhoaTap);
+                if (xoaClass > 0) {
+                    modelClass.setRowCount(0);
+                    setTableClass();
+                    JOptionPane.showMessageDialog(this, "Xóa Khóa Tập THÀNH CÔNG!");
+                    resetClass();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xóa Khóa Tập THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    resetClass();
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Xóa Khóa Tập THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-                resetClass();
+                JOptionPane.showMessageDialog(this, "Hủy thao tác xóa khóa tập!");
             }
 
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ClassManagement.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "Xóa Khóa Tập THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -582,16 +590,26 @@ public class ClassManagement extends javax.swing.JFrame {
                 String giaTien = txtCost.getText();
                 String maPhongTap = cbxRoomId.getSelectedItem().toString();
 
+                Object[] options = {"Có", "Không", "Hủy"};
+                int result = JOptionPane.showOptionDialog(rootPane,
+                        "Bạn có chắc muốn thêm khóa tập " + tenKhoaHoc + " hay không?",
+                        "Thêm khóa tập", JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
                 Class cl = new Class();
-                int themLop = cl.addClass(gioHoc, sNgKG, tenKhoaHoc, giaTien, maPhongTap);
-                if (themLop > 0) {
-                    modelClass.setRowCount(0);
-                    setTableClass();
-                    JOptionPane.showMessageDialog(this, "Thêm Khóa Tập THÀNH CÔNG!");
-                    resetClass();
+                if (result == JOptionPane.YES_OPTION) {
+                    int themLop = cl.addClass(gioHoc, sNgKG, tenKhoaHoc, giaTien, maPhongTap);
+                    if (themLop > 0) {
+                        modelClass.setRowCount(0);
+                        setTableClass();
+                        JOptionPane.showMessageDialog(this, "Thêm Khóa Tập THÀNH CÔNG!");
+                        resetClass();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Thêm Khóa Tập THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                        resetClass();
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(this, "Thêm Khóa Tập THẤT BẠI!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-                    resetClass();
+                    JOptionPane.showMessageDialog(this, "Hủy thao tác thêm khóa tập!");
                 }
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ClassManagement.class.getName()).log(Level.SEVERE, null, ex);

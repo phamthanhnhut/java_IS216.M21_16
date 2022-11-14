@@ -614,7 +614,7 @@ public class MuaHang_Staff extends javax.swing.JFrame {
                                 .addComponent(txtDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnAddDiscount)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel15)
@@ -715,7 +715,7 @@ public class MuaHang_Staff extends javax.swing.JFrame {
         btnDeletePayment.setFont(new java.awt.Font("#9Slide03 Roboto Condensed Bold", 0, 18)); // NOI18N
         btnDeletePayment.setForeground(new java.awt.Color(134, 1, 4));
         btnDeletePayment.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/icons8-cancel-64.png"))); // NOI18N
-        btnDeletePayment.setText("Xóa đơn hàng");
+        btnDeletePayment.setText("XÓA ĐƠN HÀNG");
         btnDeletePayment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeletePaymentActionPerformed(evt);
@@ -755,7 +755,7 @@ public class MuaHang_Staff extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(btnRefresh)
                         .addGap(18, 18, 18)
-                        .addComponent(btnAddPayment, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)))
+                        .addComponent(btnAddPayment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnDeletePayment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -774,7 +774,7 @@ public class MuaHang_Staff extends javax.swing.JFrame {
                         .addComponent(lbTinhTrang)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSave)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

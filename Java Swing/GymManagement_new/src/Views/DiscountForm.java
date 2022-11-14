@@ -474,8 +474,8 @@ public class DiscountForm extends javax.swing.JFrame {
 
             Object[] options = {"Có", "Không", "Hủy"};
             int result = JOptionPane.showOptionDialog(rootPane,
-                    "Bạn có chắc muốn thêm sản phẩm " + code + " hay không?",
-                    "Thêm sản phẩm", JOptionPane.YES_NO_CANCEL_OPTION,
+                    "Bạn có chắc muốn xóa mã giảm giá " + code + " hay không?",
+                    "Xóa mã giảm giá", JOptionPane.YES_NO_CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
             if (result == JOptionPane.YES_OPTION) {
@@ -514,7 +514,7 @@ public class DiscountForm extends javax.swing.JFrame {
             Object[] options = {"Có", "Không", "Hủy"};
             int result = JOptionPane.showOptionDialog(rootPane,
                     "Bạn có chắc muốn thêm mã giảm giá " + codeGG + " hay không?",
-                    "Thêm sản phẩm", JOptionPane.YES_NO_CANCEL_OPTION,
+                    "Thêm mã giảm giá", JOptionPane.YES_NO_CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
             Discount giamgia = new Discount();
